@@ -1,6 +1,6 @@
 import { userEvent } from '@testing-library/user-event';
 
-import { cRender as render, screen } from '@/testing-utils';
+import { cRender as render, screen } from '../utils/testing-utils';
 
 import NewMessageForm from '@/components/NewMessageForm';
 
