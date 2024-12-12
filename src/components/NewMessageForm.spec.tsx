@@ -1,7 +1,3 @@
-/**
- * @jest-environment jsdom
- */
-
 import { userEvent } from '@testing-library/user-event';
 
 import { cRender as render, screen } from '@/testing-utils';
