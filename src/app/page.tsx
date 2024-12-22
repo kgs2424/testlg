@@ -4,6 +4,8 @@ import { useState } from 'react';
 
 import MessageList from '@/components/MessageList';
 import NewMessageForm from '@/components/NewMessageForm';
+import UserChangeForm from '@/components/UserChangeForm';
+import CsMainForm from '@/components/CsMainForm';
 
 export default function Home() {
   const [messages, setMessages] = useState<Array<string>>([]);
@@ -14,8 +16,10 @@ export default function Home() {
 
   return (
     <>
-      <NewMessageForm onSend={handleSend} />
-      <MessageList messages={messages} />
+      {/* <NewMessageForm onSend={handleSend} /> */}
+      {/* <MessageList messages={messages} /> */}
+      {/* <UserChangeForm /> */}
+      <CsMainForm />
     </>
   );
 }
