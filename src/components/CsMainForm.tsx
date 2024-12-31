@@ -56,6 +56,7 @@ const CsMainForm: React.FC = () => {
               // hideControls={false}
               value={productNumber}
               onChange={setProductNumber}
+              type="tel"
             />
           </Grid.Col>
           {/* 생년월일 */}
@@ -65,6 +66,7 @@ const CsMainForm: React.FC = () => {
               placeholder="6자리 숫자를 입력하세요"
               value={birthDate}
               onChange={setBirthDate}
+              type="text"
             />
           </Grid.Col>
 

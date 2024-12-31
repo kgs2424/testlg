@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { ActionIcon, Box, Button, Grid, Modal, Switch, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
