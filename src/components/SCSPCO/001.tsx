@@ -1,44 +1,36 @@
 import React, { useState } from 'react';
 
-import {
-  Button,
-  TextInput,
-  Grid,
-  Title,
-  Container,
-  Switch,
-  ActionIcon,
-  useMantineTheme,
-  Modal,
-  Box,
-} from '@mantine/core';
+import { ActionIcon, Box, Button, Grid, Modal, Switch, Title } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconSearch } from '@tabler/icons-react';
 
-import CsMainDeviceInfo from './CsMaincomponents/CsMainDeviceInfo';
-import CsMainNumberInput from './CsMaincomponents/CsMainNumberInput';
-import CsMainWork from './CsMaincomponents/CsMainWork';
+import CsMainDeviceInfo from '../CsMaincomponents/CsMainDeviceInfo';
+import CsMainNumberInput from '../CsMaincomponents/CsMainNumberInput';
 
-const CsMainForm: React.FC = () => {
-  const [deviceType, setDeviceType] = useState('모바일');
+interface CSMainDeviceTypeProps {
+  deviceType: string;
+  setDeviceType: (deviceType: string) => void;
+  productNumber: string;
+  setProductNumber: (productNumber: string) => void;
+  birthDate: string;
+  setBirthDate: (birthDate: string) => void;
+}
+
+const SCSPCO001: React.FC<CSMainDeviceTypeProps> = ({
+  deviceType,
+  setDeviceType,
+  productNumber,
+  setProductNumber,
+  birthDate,
+  setBirthDate,
+}) => {
   const [modalOpened, { open: openModal, close: closeModal }] = useDisclosure(false);
-  const [productNumber, setProductNumber] = useState('');
-  const [birthDate, setBirthDate] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
-  const theme = useMantineTheme();
-  const [selectedIds, setSelectedIds] = useState<string[]>([]);
-
   const handleSearch = () => {
-    // console.log( { deviceType, productNumber, birthDate });
-    if (!deviceType || !productNumber || !birthDate) {
+    if (deviceType || !productNumber || birthDate) {
       openModal();
     }
   };
-
   return (
-    // <Container size="lg" style={{ padding: '20px' }} bg={'blue'}>
     <>
-      {/* 고객 조회 */}
       <div className="bg-blue-500 p-14 text-white">
         <Title order={3} mb="lg">
           고객 조회
@@ -53,9 +45,9 @@ const CsMainForm: React.FC = () => {
             <CsMainNumberInput
               label="상품번호"
               placeholder="'-'없이 숫자만 입력하세요."
-              // hideControls={false}
               value={productNumber}
               onChange={setProductNumber}
+              type="tel"
             />
           </Grid.Col>
           {/* 생년월일 */}
@@ -65,6 +57,7 @@ const CsMainForm: React.FC = () => {
               placeholder="6자리 숫자를 입력하세요"
               value={birthDate}
               onChange={setBirthDate}
+              type="text"
             />
           </Grid.Col>
 
@@ -98,54 +91,14 @@ const CsMainForm: React.FC = () => {
             </Modal>
           </Grid.Col>
 
+          {/* 대면체크 */}
           <Grid.Col span={2} offset={10.6}>
-            {/* 대면체크 */}
             <Switch labelPosition="left" label="비대면" />
           </Grid.Col>
         </Grid>
-      </div>
-      <div className="bg-red-500 p-2 text-white">
-        {/* 업무명 검색 */}
-        <Title order={4} mt="xl" mb="lg">
-          CS 업무명 검색
-        </Title>
-        <TextInput
-          placeholder="CS업무명을 검색하세요"
-          value={searchTerm}
-          mb="md"
-          rightSection={
-            <ActionIcon
-              color={theme.primaryColor}
-              style={{ backgroundColor: 'white' }}
-              //  variant="filled"
-            >
-              <IconSearch size={20} stroke={1.5} color={'black'} />
-            </ActionIcon>
-          }
-          onChange={(e) => setSearchTerm(e.currentTarget.value)}
-        />
-
-        {/* 업무선택 */}
-        <CsMainWork selectedIds={selectedIds} setSelectedIds={setSelectedIds} />
-
-        <Grid gutter="md">
-          <Grid.Col span={2} offset={11}>
-            <Button
-              onClick={() => {}}
-              variant="filled"
-              color="black"
-              disabled={selectedIds.length === 0}
-              mt={'sm'}
-              // justify="flex-end"
-            >
-              다음 {'>'}
-            </Button>
-          </Grid.Col>
-        </Grid>
-        {/* </Container> */}
       </div>
     </>
   );
 };
 
-export default CsMainForm;
+export default SCSPCO001;
