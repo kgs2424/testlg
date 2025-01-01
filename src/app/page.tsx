@@ -17,7 +17,6 @@ export default function Home() {
   const [deviceType, setDeviceType] = useState('모바일');
   const [productNumber, setProductNumber] = useState('');
   const [birthDate, setBirthDate] = useState('');
-
   return (
     <>
       {/* <NewMessageForm onSend={handleSend} /> */}

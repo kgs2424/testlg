@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { IMaskInput } from 'react-imask';
+import React from 'react';
 
-import { InputBase, NumberInput } from '@mantine/core';
+import { TextInput } from '@mantine/core';
 
 interface NumberInputProps {
   label: string;
   placeholder: string;
   value: string;
   onChange: (value: string) => void;
-  hideControls?: boolean;
-  type: 'text' | 'tel';
+  // type: 'text' | 'tel' | 'password';
+  length?: number;
 }
 
 const CsMainNumberInput: React.FC<NumberInputProps> = ({
@@ -17,28 +16,33 @@ const CsMainNumberInput: React.FC<NumberInputProps> = ({
   placeholder,
   value,
   onChange,
-  hideControls = true,
-  type,
+  // type,
+  length = 13,
 }) => {
-  // const [telnum, setTelnum] = useState(value);
-  // useEffect(() => {
-  //   if (telnum.length === 11) {
-  //     setTelnum(value.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3'));
-  //   }
-  // }, [telnum, value]);
-  console.log('');
+  const formatPhoneNumber = (input: string) => {
+    let digits = input.replace(/\D/g, '');
+    if (digits.length === 10) {
+      digits = digits.slice(0, 3) + '-' + digits.slice(3, 6) + '-' + digits.slice(6, 9);
+    } else if (digits.length === 13) {
+      digits = digits.slice(0, 3) + '-' + digits.slice(3, 7) + '-' + digits.slice(7, 11);
+    }
+    return digits;
+  };
+  const handleChange = (newVal: string) => {
+    onChange(formatPhoneNumber(newVal));
+  };
+
   return (
     <>
-      <NumberInput
+      <TextInput
+        type="text"
         label={label}
         placeholder={placeholder}
         value={value}
-        onChange={(newVal) => onChange(newVal?.toString() || '')}
-        hideControls={hideControls}
-        type={type}
-        maxLength={type === 'text' ? 6 : 14}
+        onChange={(e) => handleChange(e.target.value)}
+        maxLength={length}
       />
-      <InputBase type="$000-$0000-$0000" component={IMaskInput} mask="000-0000-0000" />
+      {/* <InputBase type="$000-$0000-$0000" component={IMaskInput} mask="000-0000-0000" /> */}
     </>
   );
 };
