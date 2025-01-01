@@ -47,7 +47,7 @@ const SCSPCO001: React.FC<CSMainDeviceTypeProps> = ({
               placeholder="'-'없이 숫자만 입력하세요."
               value={productNumber}
               onChange={setProductNumber}
-              type="tel"
+              // type="tel"
             />
           </Grid.Col>
           {/* 생년월일 */}
@@ -57,7 +57,8 @@ const SCSPCO001: React.FC<CSMainDeviceTypeProps> = ({
               placeholder="6자리 숫자를 입력하세요"
               value={birthDate}
               onChange={setBirthDate}
-              type="text"
+              // type="text"
+              length={6}
             />
           </Grid.Col>
 
